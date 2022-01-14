@@ -27,7 +27,7 @@ exports.createNewIssue = async (req, res, next) => {
       ht_state,
       date,
     } = req.body;
-    let [issue, _] = new Issue(
+    let issue = new Issue(
       id,
       comment,
       link,

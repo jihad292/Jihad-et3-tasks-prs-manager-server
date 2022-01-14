@@ -18,19 +18,19 @@ class Issue {
     ht_state,
     date
   ) {
-    (this.id = id),
-      (this.comment = comment),
-      (this.link = link),
-      (this.se = se),
-      (this.platform = platform),
-      (this.size = size),
-      (this.difficulty = difficulty),
-      (this.status = status),
-      (this.version = version),
-      (this.by_state = by_state),
-      (this.ah_state = ah_state),
-      (this.ht_state = ht_state),
-      (this.date = date);
+    this.id = id,
+      this.comment = comment,
+      this.link = link,
+      this.se = se,
+      this.platform = platform,
+      this.size = size,
+      this.difficulty = difficulty,
+      this.status = status,
+      this.version = version,
+      this.by_state = by_state,
+      this.ah_state = ah_state,
+      this.ht_state = ht_state,
+      this.date = date
   }
 
   async saveIssue() {
@@ -47,10 +47,10 @@ class Issue {
           '${this.by_state}',
           '${this.ah_state}',
           '${this.ht_state}',
-          '${this.date}',
+          '${this.date}'
       )`;
 
-    const [newIssue, _] = await db.execute(sql); //we used _ in place of the res in call back function
+    const [newIssue,_] = await db.execute(sql); //we used _ in place of the res in call back function
     return newIssue;
   }
 
