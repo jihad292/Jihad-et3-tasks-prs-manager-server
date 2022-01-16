@@ -60,3 +60,55 @@ exports.getIssueById = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.updateIssue = async (req, res, next) => {
+  try {
+    let {
+      id,
+      comment,
+      link,
+      se,
+      platform,
+      size,
+      difficulty,
+      status,
+      version,
+      by_state,
+      ah_state,
+      ht_state,
+      date,
+    } = req.body;
+    let issue = new Issue(
+      id,
+      comment,
+      link,
+      se,
+      platform,
+      size,
+      difficulty,
+      status,
+      version,
+      by_state,
+      ah_state,
+      ht_state,
+      date
+    );
+    issue = await issue.updateIssue();
+    res.status(202).json({ message: "Issue updated" });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+exports.deleteIssueById = async (req, res, next) => {
+  try {
+    let issueId = req.params.id;
+    let [issue, _] = await Issue.deleteById(issueId);
+    res.status(203).json({ message: "Issue deleted" });
+    return issue;
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
