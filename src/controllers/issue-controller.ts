@@ -7,6 +7,7 @@ export const issueController = {
     try {
       const [issues, _] = await IssueStore().findAll();
       res.status(200).json({ issues });
+      resetIssueParameters();
     } catch (error) {
       console.error(error);
       next(error);
@@ -19,6 +20,7 @@ export const issueController = {
       IssueStore().id.set(+issueId);
       let [issue, _] = await IssueStore().findById();
       res.status(200).json({ issue });
+      resetIssueParameters();
     } catch (error) {
       console.error(error);
       next(error);
@@ -28,7 +30,7 @@ export const issueController = {
   createIssue: async (req: Request, res: Response, next: NextFunction) => {
     try {
       parametersSetters(req);
-      IssueStore().saveissue();
+      await IssueStore().saveissue();
       res.status(201).json({ message: "Issue created" });
       resetIssueParameters();
     } catch (error) {
@@ -40,11 +42,24 @@ export const issueController = {
   updateIssue: async (req: Request, res: Response, next: NextFunction) => {
     try {
       parametersSetters(req);
-      IssueStore().updateIssue();
+      await IssueStore().updateIssue();
       res.status(201).json({ message: "Issue updated" });
       resetIssueParameters();
     } catch (error) {
       console.log(error);
+      next(error);
+    }
+  },
+
+  deleteIssue: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      let issueId = req.params.id;
+      IssueStore().id.set(+issueId);
+      await IssueStore().deleteIssue();
+      res.status(200).json({ message: "Issue is deleted" });
+      resetIssueParameters();
+    } catch (error) {
+      console.error(error);
       next(error);
     }
   },

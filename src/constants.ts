@@ -12,10 +12,12 @@ export const queries = {
     by_state: number,
     ah_state: number,
     ht_state: number,
-    date: string
+    date: string,
+    is_deleted: number
   ): string => {
-    const query = 
-    `INSERT INTO pr_issue(issue_id,comment,link,se,platform,size,difficulty,status,version,by_state,ah_state,ht_state,date) VALUES(
+    const query = `INSERT INTO pr_issue
+      (issue_id,comment,link,se,platform,size,difficulty,status,version,by_state,ah_state,ht_state,date,is_deleted) 
+        VALUES(
             '${id}',
             '${comment}',
             '${link}',
@@ -28,18 +30,20 @@ export const queries = {
             '${by_state}',
             '${ah_state}',
             '${ht_state}',
-            '${date}'
+            '${date}',
+            '${is_deleted}'
         );`;
     return query;
   },
-  findAll  : `SELECT * FROM pr_issue;`,
+  findAll: `SELECT * FROM et3test.pr_issue where (is_deleted = 0) LIMIT 20;`,
 
-  findById : (id : number) : string=>{
+  findById: (id: number): string => {
     const query = `SELECT * FROM pr_issue WHERE issue_id =  ${id}`;
     return query;
   },
 
-   updateIssue : (id: number,
+  updateIssue: (
+    id: number,
     comment: string,
     link: string,
     se: string,
@@ -51,7 +55,8 @@ export const queries = {
     by_state: number,
     ah_state: number,
     ht_state: number,
-    date: string) : string =>{
+    date: string
+  ): string => {
     let query = `UPDATE et3test.pr_issue SET 
 
     comment = '${comment}', 
@@ -70,6 +75,10 @@ export const queries = {
     WHERE (issue_id = ${id});`;
 
     return query;
-  }
-  
+  },
+
+  deleteIssue: (id: number): string => {
+    let query = `UPDATE et3test.pr_issue SET is_deleted = '1' WHERE (issue_id = ${id});`;
+    return query;
+  },
 };

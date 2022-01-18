@@ -17,6 +17,7 @@ export class IssueStoreImpl {
   ah_state = observable.box<number>();
   ht_state = observable.box<number>();
   date = observable.box<string>("");
+  is_deleted = observable.box<number>(0);
 
   async saveissue() {
     const [newIssue, _] = await db.execute(
@@ -33,7 +34,8 @@ export class IssueStoreImpl {
         this.by_state.get(),
         this.ah_state.get(),
         this.ht_state.get(),
-        this.date.get()
+        this.date.get(),
+        this.is_deleted.get()
       )
     );
     return newIssue;
@@ -66,6 +68,10 @@ export class IssueStoreImpl {
       )
     );
     return issueUpdated;
+  }
+
+  async deleteIssue() {
+    return db.query(queries.deleteIssue(this.id.get()));
   }
 }
 
