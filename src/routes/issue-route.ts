@@ -2,8 +2,12 @@ import { issueController } from "../controllers/issue-controller";
 import { Router } from "express";
 const router = Router();
 
-export const getAllIssuesRoute = router.route("/").get(issueController.getAllIssues);
+router.route("/").get(issueController.getAllIssues);
 
-export const getIssueById = router.route("/:id").get(issueController.getIssueById);
+router.route("/:id").get(issueController.getIssueById);
 
+router.route("/createIssue").post(issueController.createIssue);
 
+router.route("/updateIssue").put(issueController.updateIssue);
+
+export default router;

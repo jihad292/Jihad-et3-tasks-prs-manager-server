@@ -1,15 +1,15 @@
 import express, { Application, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 dotenv.config();
-import { issueController } from "./controllers/issue-controller";
+import router from "./routes/issue-route";
 
 const app: Application = express();
 
 // Middleware
 app.use(express.json()); // parse json bodies in the request object
 
-// Redirect requests to endpoint starting with /issues to issueRoutes.js
-app.use("/issues", issueController.getIssueById); // I am facing here trouble how to make all function set it here
+// Redirect requests to endpoint starting with /issues to issue-routes.ts
+app.use("/issues", router);
 
 // Global Error Handler. IMPORTANT function params MUST start with err
 app.use((err: any, res: Response, next: NextFunction) => {

@@ -1,5 +1,6 @@
 import { IssueStore } from "../models/issue";
 import { Request, Response, NextFunction } from "express";
+import { parametersSetters, resetIssueParameters } from "./controller-helper";
 
 export const issueController = {
   getAllIssues: async (req: Request, res: Response, next: NextFunction) => {
@@ -15,8 +16,7 @@ export const issueController = {
   getIssueById: async (req: Request, res: Response, next: NextFunction) => {
     try {
       let issueId = req.params.id;
-      IssueStore().id.set(1235);
-      console.log(issueId)
+      IssueStore().id.set(+issueId);
       let [issue, _] = await IssueStore().findById();
       res.status(200).json({ issue });
     } catch (error) {
@@ -25,5 +25,27 @@ export const issueController = {
     }
   },
 
-  
+  createIssue: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      parametersSetters(req);
+      IssueStore().saveissue();
+      res.status(201).json({ message: "Issue created" });
+      resetIssueParameters();
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  },
+
+  updateIssue: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      parametersSetters(req);
+      IssueStore().updateIssue();
+      res.status(201).json({ message: "Issue updated" });
+      resetIssueParameters();
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  },
 };
