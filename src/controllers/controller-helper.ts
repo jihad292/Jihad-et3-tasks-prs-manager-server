@@ -3,7 +3,7 @@ import { Request } from "express";
 
 export const parametersSetters = (req: Request) => {
   let {
-    id,
+    issue_id,
     comment,
     link,
     se,
@@ -17,7 +17,7 @@ export const parametersSetters = (req: Request) => {
     ht_state,
     date,
   } = req.body;
-  IssueStore().id.set(id);
+  IssueStore().id.set(issue_id);
   IssueStore().comment.set(comment);
   IssueStore().link.set(link);
   IssueStore().se.set(se);

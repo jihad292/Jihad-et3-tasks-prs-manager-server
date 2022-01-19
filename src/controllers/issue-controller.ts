@@ -53,7 +53,7 @@ export const issueController = {
 
   deleteIssue: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      let issueId = req.params.id;
+      let issueId = req.body.issue_id;
       IssueStore().id.set(+issueId);
       await IssueStore().deleteIssue();
       res.status(200).json({ message: "Issue is deleted" });

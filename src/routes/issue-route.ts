@@ -10,6 +10,6 @@ router.route("/createIssue").post(issueController.createIssue);
 
 router.route("/updateIssue").put(issueController.updateIssue);
 
-router.route("/deleteIssue/:id").put(issueController.deleteIssue);
+router.route("/deleteIssue").put(issueController.deleteIssue);
 
 export default router;
