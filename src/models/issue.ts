@@ -6,7 +6,7 @@ const issueModel = {
     const query = personalQueries.getIssues();
     return await dbAPI.queryGet<
       {
-        id_issue: number;
+        issue_id: number;
         comment: string;
         link: string;
         se: string;
