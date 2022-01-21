@@ -1,7 +1,8 @@
 import express, { Application, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 dotenv.config();
-import router from "./routes/issue-route";
+import router from "./controllers";
+
 
 const app: Application = express();
 
@@ -20,7 +21,7 @@ app.use((err: any, res: Response, next: NextFunction) => {
   res.status(500).json({
     message: "Something went realy wrong",
   });
-});
+});   
 
 const PORT = process.env.PORT || 3000;
 app.listen(process.env.PORT, () =>

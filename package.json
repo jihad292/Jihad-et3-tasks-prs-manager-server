@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/jihad292/Jihad-et3-tasks-prs-manager-server#readme",
   "dependencies": {
+    "@types/is": "^0.0.21",
     "@types/lodash.memoize": "^4.1.6",
     "dotenv": "^14.1.0",
     "express": "^4.17.2",
+    "is": "^3.3.0",
     "lodash.memoize": "^4.1.2",
     "mobx": "^6.3.12",
     "mobx-react": "^7.2.1",
