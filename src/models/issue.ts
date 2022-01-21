@@ -1,5 +1,6 @@
 import personalQueries from "../constants/SQL_QUERIES/personal";
 import dbAPI from "../system/dbAPI";
+import dbConnection from "../system/dbConnection";
 
 const issueModel = {
   async getIssues() {

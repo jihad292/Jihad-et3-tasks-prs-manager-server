@@ -3,11 +3,11 @@ import mysql from "mysql2/promise";
 import config from "../config/keys";
 import { isNullOrUndefined } from "../helpers/et3-type-guards";
 
-const configDB = config.mysql;
+const configDB = config.mysql();
 let instance_default: any = null;
 const dbConnection = {
   getDataBase() {
-    if (instance_default != null) {
+    if (instance_default === null) {
       try {
         const pool = mysql.createPool(configDB);
         instance_default = pool;
@@ -22,11 +22,12 @@ const dbConnection = {
     try {
       const pool = this.getDataBase();
       if (isNullOrUndefined(pool)) {
+        console.log("Connection failed");
         return;
       }
-      connection = await pool.getConnection();
+      connection = await pool;
       const [rows] = await connection.query(query);
-      connection.release();
+      // connection.release();
       return rows;
     } catch (exception) {
       if (!isNullOrUndefined(connection)) {

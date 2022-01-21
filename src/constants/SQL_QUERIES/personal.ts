@@ -1,6 +1,7 @@
 const personalQueries = {
     getIssues : (): string =>{
-        return `select * from et3test.pr_issue`;
+        const query : string = `SELECT * FROM et3test.pr_issue LIMIT 20;`
+        return query;
     },
 }
 
