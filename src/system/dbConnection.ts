@@ -31,7 +31,7 @@ const dbConnection = {
       return rows;
     } catch (exception) {
       if (!isNullOrUndefined(connection)) {
-        connection.release();
+        // connection.release();
       }
       console.log(exception);
     }
