@@ -8,6 +8,11 @@ const issueModel = {
     return await dbAPI.queryGet<IssueObject[]>(query);
   },
 
+  async getIssueById(issue_id: number) {
+    const query = personalQueries.getIssueById(issue_id);
+    return await dbAPI.queryGet<IssueObject>(query);
+  },
+
   async createIssue(issueCreated: IssueObject) {
     const query = personalQueries.createIssue(issueCreated);
     return await dbAPI.queryExecute(query);

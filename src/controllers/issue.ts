@@ -17,7 +17,7 @@ const issueController = {
   async getIssueById(req: Request, res: Response) {
     try {
       let issueId = req.params.id;
-      const issueById = await issueLibrary.getIssueById(+issueId);
+      const issueById = await issueModel.getIssueById(+issueId);
       res.json(issueById);
     } catch (error) {
       console.log(error);

@@ -2,8 +2,12 @@ import { IssueObject } from "../../helpers/et3-type-guards/types";
 
 const personalQueries = {
   getIssues: (): string => {
-    const query: string = `SELECT * FROM et3test.pr_issue LIMIT 20;`;
+    const query: string = `SELECT * FROM et3test.pr_issue where (is_deleted = 0) LIMIT 20;`;
     return query;
+  },
+
+  getIssueById: (id: number): string => {
+    return `select * from et3test.pr_issue where ( (is_deleted = 0) and issue_id = ${id} );`;
   },
 
   createIssue: (issue: IssueObject): string => {
