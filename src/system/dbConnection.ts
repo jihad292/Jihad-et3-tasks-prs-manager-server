@@ -27,11 +27,11 @@ const dbConnection = {
       }
       connection = await pool;
       const [rows] = await connection.query(query);
-      // connection.release();
+      connection = null;
       return rows;
     } catch (exception) {
       if (!isNullOrUndefined(connection)) {
-        // connection.release();
+        connection = null;
       }
       console.log(exception);
     }
